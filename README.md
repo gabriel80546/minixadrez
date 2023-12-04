@@ -1,0 +1,2 @@
+# minixadrez
+minixadrez
