@@ -1,62 +1,70 @@
 #include <stdio.h>
 
+
+char pieceNumberToChar(int piece) {
+    char saida;
+
+    saida = '?';
+    switch (piece) {
+        case 0x00:
+            saida = '_';
+            break;
+
+        case 0x01:
+            saida = 'p';
+            break;
+        case 0x81:
+            saida = 'P';
+            break;
+
+        case 0x02:
+            saida = 'n';
+            break;
+        case 0x82:
+            saida = 'N';
+            break;
+
+        case 0x03:
+            saida = 'b';
+            break;
+        case 0x83:
+            saida = 'B';
+            break;
+
+        case 0x04:
+            saida = 'r';
+            break;
+        case 0x84:
+            saida = 'R';
+            break;
+
+        case 0x05:
+            saida = 'q';
+            break;
+        case 0x85:
+            saida = 'Q';
+            break;
+
+        case 0x06:
+            saida = 'k';
+            break;
+        case 0x86:
+            saida = 'K';
+            break;
+
+
+        default:
+            saida = '?';
+            break;
+    }
+    return saida;
+}
+
 void showBoard(int* board12and10) {
     int i, j, k;
     for(j = 0; j < 8; j++) {
         for(i = 0; i < 8; i++) {
-            k = board12and10[21 + i + (j * 10)];
-            switch (k) {
-            case 0x00:
-                printf("_ ");
-                break;
-
-            case 0x01:
-                printf("p ");
-                break;
-            case 0x81:
-                printf("P ");
-                break;
-
-            case 0x02:
-                printf("n ");
-                break;
-            case 0x82:
-                printf("N ");
-                break;
-
-            case 0x03:
-                printf("b ");
-                break;
-            case 0x83:
-                printf("B ");
-                break;
-
-            case 0x04:
-                printf("r ");
-                break;
-            case 0x84:
-                printf("R ");
-                break;
-
-            case 0x05:
-                printf("q ");
-                break;
-            case 0x85:
-                printf("Q ");
-                break;
-
-            case 0x06:
-                printf("k ");
-                break;
-            case 0x86:
-                printf("K ");
-                break;
-
-
-            default:
-                printf("? ");
-                break;
-            }
+            printf("%c ", pieceNumberToChar(board12and10[21 + i + (j * 10)]));
         }
         printf("\n");
     }
