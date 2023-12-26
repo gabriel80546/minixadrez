@@ -63,7 +63,7 @@ char pieceNumberToChar(int piece) {
 }
 
 void showBoard(int* board12and10) {
-    int i, j, k;
+    int i, j;
     for(j = 0; j < 8; j++) {
         for(i = 0; i < 8; i++) {
             printf("%c ", pieceNumberToChar(board12and10[21 + i + (j * 10)]));
