@@ -78,7 +78,7 @@ void showBoard(int* board12and10) {
 
 
 int *makeBoard(char *fen) {
-    int i;
+    int i, j;
     int letra;
     int ptrTabuleiro;
     int *board;
@@ -100,12 +100,14 @@ int *makeBoard(char *fen) {
         board[i] = padrao[i];
     }
     i = 0;
-    ptrTabuleiro = 25;
-    while(fen[i] != '\0') {
+    ptrTabuleiro = 21;
+    while(fen[i] != '\0' && fen[i] != ' ') {
+        // printf("fen[i] = %c; i = %i; ptrTabuleiro = %i\n", fen[i], i, ptrTabuleiro);
+        // showBoard(board);
 
         switch (fen[i]) {
-            case '_':
-                board[ptrTabuleiro] = 0x00;
+            case ' ':
+                ptrTabuleiro += 120;
                 break;
 
             case 'p':
@@ -140,7 +142,7 @@ int *makeBoard(char *fen) {
                 board[ptrTabuleiro] = 0x05;
                 break;
             case 'Q':
-                board[ptrTabuleiro] = 0x84;
+                board[ptrTabuleiro] = 0x85;
                 break;
 
             case 'k':
@@ -150,8 +152,63 @@ int *makeBoard(char *fen) {
                 board[ptrTabuleiro] = 0x86;
                 break;
 
+            case '1':
+                board[ptrTabuleiro] = 0x00;
+                break;
+
+            case '2':
+                for(j = 0; j < 2; j++) {
+                    board[ptrTabuleiro + j] = 0x00;
+                }
+                ptrTabuleiro += 1;
+                break;
+
+            case '3':
+                for(j = 0; j < 3; j++) {
+                    board[ptrTabuleiro + j] = 0x00;
+                }
+                ptrTabuleiro += 2;
+                break;
+
+            case '4':
+                for(j = 0; j < 4; j++) {
+                    board[ptrTabuleiro + j] = 0x00;
+                }
+                ptrTabuleiro += 3;
+                break;
+
+            case '5':
+                for(j = 0; j < 5; j++) {
+                    board[ptrTabuleiro + j] = 0x00;
+                }
+                ptrTabuleiro += 4;
+                break;
+
+            case '6':
+                for(j = 0; j < 6; j++) {
+                    board[ptrTabuleiro + j] = 0x00;
+                }
+                ptrTabuleiro += 5;
+                break;
+
+            case '7':
+                for(j = 0; j < 7; j++) {
+                    board[ptrTabuleiro + j] = 0x00;
+                }
+                ptrTabuleiro += 6;
+                break;
+
+            case '8':
+                for(j = 0; j < 8; j++) {
+                    board[ptrTabuleiro + j] = 0x00;
+                }
+                ptrTabuleiro += 7;
+                break;
+
+
+
             case '/':
-                ptrTabuleiro += 11;
+                ptrTabuleiro += 1;
                 break;
 
             default:
@@ -169,6 +226,7 @@ int *makeBoard(char *fen) {
 int main() {
     int i;
     int *board = makeBoard("rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2");
+    // int *board = makeBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
     showBoard(board);
     free(board);
     return 0;
