@@ -62,6 +62,8 @@ char pieceNumberToChar(int piece) {
     return saida;
 }
 
+
+
 void showBoard(int* board12and10) {
     int i, j;
     for(j = 0; j < 8; j++) {
@@ -77,6 +79,8 @@ void showBoard(int* board12and10) {
 
 int *makeBoard(char *fen) {
     int i;
+    int letra;
+    int ptrTabuleiro;
     int *board;
     board = (int *) malloc(sizeof(int) * 120);
     int padrao[120] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -95,12 +99,76 @@ int *makeBoard(char *fen) {
     for(i = 0; i < 120; i++) {
         board[i] = padrao[i];
     }
+    i = 0;
+    ptrTabuleiro = 25;
+    while(fen[i] != '\0') {
+
+        switch (fen[i]) {
+            case '_':
+                board[ptrTabuleiro] = 0x00;
+                break;
+
+            case 'p':
+                board[ptrTabuleiro] = 0x01;
+                break;
+            case 'P':
+                board[ptrTabuleiro] = 0x81;
+                break;
+
+            case 'n':
+                board[ptrTabuleiro] = 0x02;
+                break;
+            case 'N':
+                board[ptrTabuleiro] = 0x82;
+                break;
+
+            case 'b':
+                board[ptrTabuleiro] = 0x03;
+                break;
+            case 'B':
+                board[ptrTabuleiro] = 0x83;
+                break;
+
+            case 'r':
+                board[ptrTabuleiro] = 0x04;
+                break;
+            case 'R':
+                board[ptrTabuleiro] = 0x84;
+                break;
+
+            case 'q':
+                board[ptrTabuleiro] = 0x05;
+                break;
+            case 'Q':
+                board[ptrTabuleiro] = 0x84;
+                break;
+
+            case 'k':
+                board[ptrTabuleiro] = 0x06;
+                break;
+            case 'K':
+                board[ptrTabuleiro] = 0x86;
+                break;
+
+            case '/':
+                ptrTabuleiro += 11;
+                break;
+
+            default:
+                break;
+        }
+        i++;
+        ptrTabuleiro++;
+        if(ptrTabuleiro > 108) {
+            break;
+        }
+    }
     return board;
 }
 
 int main() {
     int i;
-    int *board = makeBoard("");
+    int *board = makeBoard("rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2");
     showBoard(board);
     free(board);
     return 0;
@@ -146,3 +214,14 @@ int main() {
 ; 		0 -- Empty Square
 ; *******************************************************
 */
+
+
+// ♜♞♝♛♚♝♞♜
+// ♟♟ ♟♟♟♟♟
+// 
+//   ♟     
+//     ♙   
+//      ♘  
+// ♙♙♙♙ ♙♙♙
+// ♖♘♗♕♔♗ ♖
+// rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2 
